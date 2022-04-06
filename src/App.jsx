@@ -1,6 +1,6 @@
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { Route, Routes } from "react-router-dom";
 import Layout from "./components/Layout";
 import RequireAuth from "./components/RequireAuth";
 import { getTokens } from "./helpers/setAndRemoveToken";
@@ -9,11 +9,7 @@ import Rules from "./pages/Rules";
 import { checkAuth } from "./redux/actions/fetchActions";
 
 function App() {
-  const { isAuth } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const location = useLocation();
-  const from = location.state?.from?.pathname || "/";
 
   useEffect(() => {
     const { refreshToken } = getTokens();
@@ -21,12 +17,6 @@ function App() {
       dispatch(checkAuth());
     }
   }, [dispatch]);
-
-  useEffect(() => {
-    if (isAuth) {
-      navigate('/rules', { replace: true });
-    }
-  }, [isAuth, navigate, from]);
 
   return (
     <Routes>

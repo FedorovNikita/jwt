@@ -1,6 +1,4 @@
-import { useSelector } from "react-redux";
-import { Outlet, Route, Routes } from "react-router-dom";
-import Login from "../../pages/login";
+import { Outlet } from "react-router-dom";
 import Header from "../Header";
 
 const Layout = () => {
